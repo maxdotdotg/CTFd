@@ -18,7 +18,8 @@ SCRIPT
 
 # Wrap provisioning script with a virutalenv for pip packages
 $provision= <<SCRIPT
-VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 source /usr/local/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
 mkvirtualenv ctfd
 workon ctfd
 cd /vagrant
@@ -35,7 +36,8 @@ SCRIPT
 
 # Start development server in a tmux session
 $startServer= <<SCRIPT
-VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 source /usr/local/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
 workon ctfd
 
 export DATABASE_URL="mysql+pymysql://ctfduser:ctfd@localhost/ctfd"
