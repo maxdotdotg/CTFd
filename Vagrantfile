@@ -5,7 +5,8 @@
 $preProvision= <<SCRIPT
 # Prevent attempt to access stdin, causing dpkg-reconfigure error output
 export DEBIAN_FRONTEND=noninteractive
-apt-get install -y tmux virtualenvwrapper
+apt-get install -y tmux python3-pip
+python3 -m pip install virtualenvwrapper
 
 # As per instructions at https://downloads.mariadb.org/mariadb/repositories
 apt-get install -y software-properties-common
@@ -17,7 +18,7 @@ SCRIPT
 
 # Wrap provisioning script with a virutalenv for pip packages
 $provision= <<SCRIPT
-source /usr/share/virtualenvwrapper/virtualenvwrapper_lazy.sh
+VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 source /usr/local/bin/virtualenvwrapper.sh
 mkvirtualenv ctfd
 workon ctfd
 cd /vagrant
@@ -34,7 +35,7 @@ SCRIPT
 
 # Start development server in a tmux session
 $startServer= <<SCRIPT
-source /usr/share/virtualenvwrapper/virtualenvwrapper_lazy.sh
+VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 source /usr/local/bin/virtualenvwrapper.sh
 workon ctfd
 
 export DATABASE_URL="mysql+pymysql://ctfduser:ctfd@localhost/ctfd"
