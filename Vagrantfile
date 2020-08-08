@@ -5,6 +5,7 @@
 $preProvision= <<SCRIPT
 # Prevent attempt to access stdin, causing dpkg-reconfigure error output
 export DEBIAN_FRONTEND=noninteractive
+apt-get update
 apt-get install -y tmux python3-pip
 python3 -m pip install virtualenvwrapper
 
